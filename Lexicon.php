@@ -1,6 +1,6 @@
 <?php
 /*
- * Copyright (C) 2007  BarkerJr (C) 2008 Benjamin Kahn (C) 2010 Saman Desilva and (C) 2010 Mason McLead
+* Copyright (C) 2007  BarkerJr (C) 2008 Benjamin Kahn (C) 2010 Saman Desilva and (C) 2010 Mason McLead of WiiKno Inc. http://www.wiikno.com
  *
  * This program is free software; you can redistribute it and/or
  * modify it under the terms of the GNU General Public License
@@ -21,7 +21,7 @@ $wgExtensionCredits['parserhook'][] = array(
   'name' => 'Lexicon',
   'description' => 'Provides tooltips from the [[Terminology]] defined for all instances of the given term',
   'version' => '20100905',
-  'author' => 'BarkerJr modified by Benjamin Kahn (xkahn@zoned.net) modified by Saman Desilva, Wiikno Inc'
+ 'author' => 'BarkerJr modified by Benjamin Kahn (xkahn@zoned.net) modified by Saman Desilva, Wiikno Inc (www.wiikno.com)'
 );
  
 $wgExtensionFunctions[] = 'terminologySetup';
@@ -37,9 +37,9 @@ $wgHooks['ParserBeforeTidy'][] = 'terminologyParser';
 function terminologyParser(&$parser, &$text) {
   global $wgRequest,$wgTemplateName,$wgTermField,$wgDefinitionField;
   
-  $templatename = $wgTemplateName?$wgTemplateName:"Term";
-  $termfield = $wgTermField?$wgTermField:"Term";
-  $definitionfield = $wgDefinitionField?$wgDefinitionField:"Definition";
+  $templatename = $wgTemplateName?$wgTemplateName:"Lexicon";
+  $termfield = $wgTermField?$wgTermField:"term";
+  $definitionfield = $wgDefinitionField?$wgDefinitionField:"definition";
  
   $action = $wgRequest->getVal( 'action', 'view' );             
   if ($action=="edit" || $action=="ajax" || isset($_POST['wpPreview'])) return false;
@@ -169,9 +169,9 @@ function set_cache_state ($state) {
 function full_refresh () {
   global $wgRequest,$wgTemplateName,$wgTermField,$wgDefinitionField;
   
-  $templatename = $wgTemplateName?$wgTemplateName:"Term";
-  $termfield = $wgTermField?$wgTermField:"Term";
-  $definitionfield = $wgDefinitionField?$wgDefinitionField:"Definition";
+  $templatename = $wgTemplateName?$wgTemplateName:"Lexicon";
+  $termfield = $wgTermField?$wgTermField:"term";
+  $definitionfield = $wgDefinitionField?$wgDefinitionField:"definition";
    $dbw = wfGetDB(DB_MASTER);
    $res = $dbw->doQuery("TRUNCATE TABLE Lexicon_cache");
    $dbr = wfGetDB(DB_MASTER);
@@ -211,9 +211,9 @@ function full_refresh () {
 function refresh (&$row) {
   global $wgRequest,$wgTemplateName,$wgTermField,$wgDefinitionField;
   
-  $templatename = $wgTemplateName?$wgTemplateName:"Term";
-  $termfield = $wgTermField?$wgTermField:"Term";
-  $definitionfield = $wgDefinitionField?$wgDefinitionField:"Definition";
+  $templatename = $wgTemplateName?$wgTemplateName:"Lexicon";
+  $termfield = $wgTermField?$wgTermField:"term";
+  $definitionfield = $wgDefinitionField?$wgDefinitionField:"definition";
    $dbr = wfGetDB (DB_MASTER);
    $res = $dbr->select ('templatelinks',
                  array('tl_from'),
